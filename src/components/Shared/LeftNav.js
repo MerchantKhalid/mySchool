@@ -11,11 +11,11 @@ const LeftNav = () => {
     },[])
     return (
         <div>
-             <h2>All Courses {courses.length}</h2>
+             <h4 className="text-bold text-secondary">All Courses</h4>
              <div>
              {
                courses.map(course=><p key={course.id}>
-                <Link>{course.name}</Link>
+                <Link to={`/course/${course.id}`}>{course.name}</Link>
                </p>) 
             }
              </div>
