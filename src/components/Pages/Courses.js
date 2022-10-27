@@ -15,7 +15,7 @@ const Courses = () => {
         {details}
         </Card.Text>
         <Link to={'/checkout'}>
-            <Button>Checkout</Button>
+            <Button variant='success'>Checkout</Button>
         </Link>
       </Card.Body>
     </Card>

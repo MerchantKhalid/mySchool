@@ -14,7 +14,7 @@ const NavCourses = ({course}) => {
         <Card.Text className='bg-dark text-white p-3'>
         {details}
         </Card.Text>
-        <Link className='text-white' to='/checkout'><Button variant="secondary">Enroll</Button></Link>
+        <Link className='text-white' to='/checkout'><Button variant="success">Enroll</Button></Link>
       </Card.Body>
     </Card>
             

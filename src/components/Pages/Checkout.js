@@ -39,7 +39,7 @@ const Checkout = () => {
 
       
       
-      <Button onClick={handleOrder} className='w-full' variant="primary" type="submit">
+      <Button onClick={handleOrder} className='w-full' variant="success" type="submit">
         Place Order
       </Button>
       
