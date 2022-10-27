@@ -5,20 +5,32 @@ import { FaGoogle,FaGithub,FaFacebook,FaTwitter,FaSnapchat,FaWhatsapp,FaInstagra
 import ListGroup from 'react-bootstrap/ListGroup';
 import BrandCarousel from './BrandCarousel';
 import { AuthContext } from '../Hooks/AuthProvider';
-import { GoogleAuthProvider } from 'firebase/auth';
+import { GithubAuthProvider, GoogleAuthProvider } from 'firebase/auth';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 const RightNav = () => {
  
-    const {providerLogin}= useContext(AuthContext)
+    const {providerLogin,githuProvider}= useContext(AuthContext)
     const navigate = useNavigate() 
     const location = useLocation()
     const from = location.state?.from?.pathname || '/'
 
     const googleProvider = new GoogleAuthProvider();
+    const gitProvider = new GithubAuthProvider();
     // google
     const hadleGoogleSigIn = ()=>{
         providerLogin(googleProvider)
+        navigate(from,{replace:true})
+        .then(result=>{
+            const user = result.user
+            console.log(user)
+        })
+        .catch(error=>console.error(error))
+    }
+
+    // git
+    const handleGitSignIn = ()=>{
+        githuProvider(gitProvider)
         navigate(from,{replace:true})
         .then(result=>{
             const user = result.user
@@ -30,7 +42,7 @@ const RightNav = () => {
         <div>
            <ButtonGroup vertical>
                 <Button onClick={hadleGoogleSigIn} variant="outline-primary" className='mb-2 text-dark'><FaGoogle className='text-primary' /> LogIn With Google</Button>
-                <Button variant="outline-dark"><FaGithub /> LogIn With GitHub</Button>
+                <Button onClick={handleGitSignIn} variant="outline-dark"><FaGithub /> LogIn With GitHub</Button>
            </ButtonGroup>
 
            <div>

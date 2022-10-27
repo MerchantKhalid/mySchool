@@ -15,6 +15,12 @@ const AuthProvider = ({ children}) => {
             return signInWithPopup(auth,provider) 
     }
 
+    //gitHub
+    const githuProvider=(provider)=>{
+        setLoading(true)
+        return signInWithPopup(auth,provider) 
+    }
+
     //userWithEmailPassword
     const createUser = (email,password) =>{
         setLoading(true)
@@ -46,15 +52,17 @@ const AuthProvider = ({ children}) => {
     } 
     useEffect(()=> {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-            console.log('user,,',currentUser)
-            setUser(currentUser)  
+            if(currentUser===null || currentUser.emailVerified){
+                setUser(currentUser)  
+            }
+            
             setLoading(false) 
         });
         return ()=> {
             unsubscribe() 
         }
     },[])
-    const authInfo  = {user,providerLogin,logOut,createUser,signIn,loading,userUpdateProfile,verifyEmail}
+    const authInfo  = {user,providerLogin,logOut,createUser,signIn,githuProvider,setLoading,loading,userUpdateProfile,verifyEmail}
     return (
         <AuthContext.Provider value = { authInfo}>
                 {children}
